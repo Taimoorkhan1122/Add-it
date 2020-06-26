@@ -3,6 +3,11 @@
 #[macro_use] extern crate rocket;
 use rocket::http::RawStr;
 
+#[get("/")]
+fn hello() -> String {
+
+}
+
 #[get("/add-it/<num>")] //getting dynamic parameters
 
 // =======Basic implementation==========
@@ -45,7 +50,7 @@ fn index(num: Result<i8 , &RawStr>) -> String {
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite().mount("/", routes![index, hello]).launch();
 }
 
 
