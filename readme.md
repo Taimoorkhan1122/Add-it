@@ -1,4 +1,4 @@
-# Add-it end api in Rust 
+# Add-it endpoint api in Rust 
 - Built on Rocket this add-it api takes querry parameter and returns adding number defined.
 -for example    `https://wwww.someurl.com/add-it/10` <br>
 the response will be **15**
