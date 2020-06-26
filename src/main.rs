@@ -1,18 +1,48 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
 #[macro_use] extern crate rocket;
+use rocket::http::RawStr;
 
-#[get("/add-it/<num>/<name>")]
-fn index(num: u64 , name: String) -> String {
-    let add = num + 5;
-    return format!("you entere {} and I add-it {}", num , add)
+#[get("/add-it/<num>")] //getting dynamic parameters
 
-// implementing Even or Odd feature
-    // if num%2 == 0 {
-    //     return format!("The number {} is Even", num)
-    // } else {
-    //     return format!("The number {} is Odd", num)
-    // }
+// =======Basic implementation==========
+
+// fn index(num: i16) -> String {
+//     let add = num + 5;
+//     return format!("you entere {} and I add-it {}", num , add)
+// }
+
+//     =======Implementation with Error handling==========
+
+/* 
+To convert dynamic paths segments into desired type Rockets implents a trait
+From_param when when a path contains a dynamic segment <param> where param 
+has some type T that implements FromParam, T::from_param will be called.
+
+We can use the returned values from Result<T, T::Error> to catch the erro
+if for some reason From_param fails to convert the type.
+*/
+fn index(num: Result<i8 , &RawStr>) -> String { 
+    match num {
+        Ok(mut int_num) => {
+            let num = int_num;
+            int_num += 10;
+            format!("you entere {:?} and I add-it {}", num, int_num)
+        },
+        Err(err_str) => {
+            let mut slplitter: Vec<&str> = err_str.split("%20",).collect();
+            let mut msg = String::from("");
+            
+            for words in slplitter {
+                msg.push_str(words);
+                msg.push(' ');    
+            }
+            
+            format!("Not a Number: {}", msg)
+        }
+    }
+    
+
 }
 
 fn main() {
