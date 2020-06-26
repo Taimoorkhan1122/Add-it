@@ -15,7 +15,7 @@ use rocket::http::RawStr;
 //     =======Implementation with Error handling==========
 
 /* 
-To convert dynamic paths segments into desired type Rockets implents a trait
+To convert dynamic paths segments into desired type Rocket implents a trait
 From_param when when a path contains a dynamic segment <param> where param 
 has some type T that implements FromParam, T::from_param will be called.
 
@@ -27,7 +27,7 @@ fn index(num: Result<i8 , &RawStr>) -> String {
         Ok(mut int_num) => {
             let num = int_num;
             int_num += 10;
-            format!("you entere {:?} and I add-it {}", num, int_num)
+            format!("you entered {:?} and I add-it {}", num, int_num)
         },
         Err(err_str) => {
             let mut slplitter: Vec<&str> = err_str.split("%20",).collect();
@@ -37,7 +37,6 @@ fn index(num: Result<i8 , &RawStr>) -> String {
                 msg.push_str(words);
                 msg.push(' ');    
             }
-            
             format!("Not a Number: {}", msg)
         }
     }
@@ -48,3 +47,6 @@ fn index(num: Result<i8 , &RawStr>) -> String {
 fn main() {
     rocket::ignite().mount("/", routes![index]).launch();
 }
+
+
+31ca83c16579acb145359ff0f68986b1
