@@ -5,7 +5,7 @@ use rocket::http::RawStr;
 
 #[get("/")]
 fn hello() -> &'static str {
-    return "Hello world from heroku"
+    return "Hello world from rust server"
 }
 
 #[get("/add-it/<num>")] //getting dynamic parameters
