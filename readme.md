@@ -6,7 +6,4 @@ the response will be **15**
 -for example    `https://wwww.someurl.com/add-it/Some other text` <br>
 the response will be **Not a Number: Some other text**
 
-- See live site here https://add-it.onrender.com/ 
-- See live site here https://add-it.onrender.com/add-it/100 
-
 ## that's it!
