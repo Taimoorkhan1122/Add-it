@@ -27,7 +27,7 @@ has some type T that implements FromParam, T::from_param will be called.
 We can use the returned values from Result<T, T::Error> to catch the erro
 if for some reason From_param fails to convert the type.
 */
-fn index(num: Result<i8 , &RawStr>) -> String { 
+fn index(num: Result<i16 , &RawStr>) -> String { 
     match num {
         Ok(mut int_num) => {
             let num = int_num;
@@ -35,7 +35,7 @@ fn index(num: Result<i8 , &RawStr>) -> String {
             format!("you entered {:?} and I add-it {}", num, int_num)
         },
         Err(err_str) => {
-            let mut slplitter: Vec<&str> = err_str.split("%20",).collect();
+            let slplitter: Vec<&str> = err_str.split("%20",).collect();
             let mut msg = String::from("");
             
             for words in slplitter {
